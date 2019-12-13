@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  lab:
+    image: jupyter/scipy-notebook:7a0c7325e470
+
+    volumes:
+      - ./certs:/etc/ssl/notebook
+      - .:/home/jovyan/work
+    command:
+      - start-notebook.sh
+      - --NotebookApp.password=u'sha1:147d640d8d0f:5fbe280f0000a642c8dae9e6ca4f97e4f0c5ccc7'
+      - --NotebookApp.certfile=/etc/ssl/notebook/jupyter-nb-cert.pem
+      - --NotebookApp.keyfile=/etc/ssl/notebook/jupyter-nb-key.key
+    ports:
+      - "18888:8888"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      # NB_UID: 1010
+      # user: root
